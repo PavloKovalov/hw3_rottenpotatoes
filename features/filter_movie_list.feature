@@ -23,11 +23,8 @@ Background: movies have been added to database
 
 Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to check the 'PG' and 'R' checkboxes
-  When I check "ratings_PG"
-  And I check "ratings_R"
-  And I uncheck "ratings_G"
-  And I uncheck "ratings_PG-13"
-  And I uncheck "ratings_NC-17"
+  When I check the following ratings: ratings_PG, ratings_R
+  And I uncheck the following ratings: ratings_G, ratings_PG-13, ratings_NC-17
   And I press "Refresh"
   # enter step(s) to ensure that PG and R movies are visible
   Then I should see "The Terminator"

@@ -25,7 +25,12 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-  puts uncheck
-  puts rating_list
-  assert false, 'Fucker'
+  rating_list.split(/,\s?/).each do |rating|
+    p uncheck
+    if uncheck
+      When %Q{I uncheck "#{rating}"}
+    else
+      When %Q{I check "#{rating}"}
+    end
+  end
 end
