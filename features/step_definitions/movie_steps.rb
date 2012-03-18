@@ -2,7 +2,8 @@
 
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
-    Movie.create!(movie)
+    @movie = Movie.create(movie)
+    assert @movie!=nil, "Can't add movie"
   end
   assert Movie.count === movies_table.hashes.count, "Wrong number of movies added"
 end
@@ -24,4 +25,7 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  puts uncheck
+  puts rating_list
+  assert false, 'Fucker'
 end
