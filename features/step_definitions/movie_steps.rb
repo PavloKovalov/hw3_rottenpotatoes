@@ -34,11 +34,19 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   end
 end
 
-Then /I should see all of the movies/ do 
+Then /I should see all of the movies/ do
   expect_count = Movie.count
-  # if page.respond_to? :should
-  #   page.should have_css("table#movies tbody tr", :count => expect_count)
-  # else
-    assert page.has_selector?("table#movies tbody tr", :count => expect_count), "Not all movies preseent"
-  # end
+  if page.respond_to? :should
+    page.should have_css("table#movies tbody tr", :count => expect_count)
+  else
+    assert page.has_selector?("table#movies tbody tr", :count => expect_count), "Not all the movies displayed"
+  end
+end
+
+Then /I should not see all of the movies/ do 
+  if page.respond_to? :should
+    page.should have_no_css("table#movies tbody tr")
+  else
+    assert page.has_no_selector?("table#movies tbody tr", :count => 0), "Movie list must be empty"
+  end
 end
