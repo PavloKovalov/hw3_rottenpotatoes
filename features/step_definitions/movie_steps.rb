@@ -26,11 +26,19 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
   rating_list.split(/,\s?/).each do |rating|
-    p uncheck
-    if uncheck
+    if uncheck === 'un'
       When %Q{I uncheck "#{rating}"}
     else
       When %Q{I check "#{rating}"}
     end
   end
+end
+
+Then /I should see all of the movies/ do 
+  expect_count = Movie.count
+  # if page.respond_to? :should
+  #   page.should have_css("table#movies tbody tr", :count => expect_count)
+  # else
+    assert page.has_selector?("table#movies tbody tr", :count => expect_count), "Not all movies preseent"
+  # end
 end
