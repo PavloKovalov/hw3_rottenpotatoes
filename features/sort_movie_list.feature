@@ -20,10 +20,15 @@ Background: movies have been added to database
   | Chicken Run             | G      | 21-Jun-2000  |
 
   And I am on the RottenPotatoes home page
+  And I check the following ratings: ratings_PG, ratings_R, ratings_G, ratings_PG-13, ratings_NC-17
+  And I press "Refresh"
 
 Scenario: sort movies alphabetically
-  # your steps here
+  When I follow "title_header"
+  Then I should be on the RottenPotatoes home page
+  And I should see "Aladdin" before "Chocolat"
 
 Scenario: sort movies in increasing order of release date
-  # your steps here
-
+  When I follow "Release Date"
+  Then I should be on the RottenPotatoes home page
+  And I should see "The Terminator" before "Amelie"
