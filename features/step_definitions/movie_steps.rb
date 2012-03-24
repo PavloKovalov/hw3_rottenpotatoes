@@ -27,9 +27,9 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
   rating_list.split(/,\s?/).each do |rating|
     if uncheck === 'un'
-      When %Q{I uncheck "#{rating}"}
+      step %Q{I uncheck "#{rating}"}
     else
-      When %Q{I check "#{rating}"}
+      step %Q{I check "#{rating}"}
     end
   end
 end
