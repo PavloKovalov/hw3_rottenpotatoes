@@ -50,3 +50,8 @@ Then /I should not see all of the movies/ do
     assert page.has_no_selector?("table#movies tbody tr", :count => 0), "Movie list must be empty"
   end
 end
+
+Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |arg1, arg2|
+  movie = Movie.find_by_title(arg1)
+  assert movie.director == arg2
+end
